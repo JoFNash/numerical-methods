@@ -34,7 +34,7 @@ double DichotomyMethod(double A, double B, double (*Foo)(double), int &count_ope
 }
 
 
-double IterationMethod(double A, double B, double (*Foo)(double), int &count_operations)
+double IterationMethod(double A, double B, double (*Foo)(double), double (*myFooDerivative)(double), int &count_operations)
 {
 	double	X;
 	double	parameter;
@@ -45,8 +45,8 @@ double IterationMethod(double A, double B, double (*Foo)(double), int &count_ope
 	X = B;
 	if (myFooDerivative(A) < 0)
 		sign = -1;
-	parameter = 2.0 / (fabs(myFooDerivative(A) + myFooDerivative(B)));
-	while (fabs(Foo(X)) > E)
+	parameter = 2 / (abs(myFooDerivative(A) + myFooDerivative(B)));
+	while (abs(Foo(X)) > E)
 	{
 		X = X - parameter * sign * Foo(X);
 		count_operations++;
@@ -55,26 +55,25 @@ double IterationMethod(double A, double B, double (*Foo)(double), int &count_ope
 }
 
 
-
 int	main(void)
 {
 	int count_operations;
 
 	cout << "----------------------Вариант №7----------------------" << endl;
 	cout << "1. Метод дихотомии" << endl;
-	cout << "Корень = " << DichotomyMethod(1, 2, &myFoo, count_operations) << endl <<
+	cout << "Корень = " << DichotomyMethod(1.5, 2, &myFoo, count_operations) << endl <<
 				"Число итераций до получения результата: " << count_operations << endl << endl;
-	cout << "Корень = " << DichotomyMethod(-2, 0, &myFoo, count_operations) << endl <<
+	cout << "Корень = " << DichotomyMethod(-2, -1, &myFoo, count_operations) << endl <<
 				"Число итераций до получения результата: " << count_operations << endl << endl;
-	cout << "Корень = " << DichotomyMethod(-1, 0, &myFoo, count_operations) << endl << 
+	cout << "Корень = " << DichotomyMethod(-0.5, 0, &myFoo, count_operations) << endl << 
 				"Число итераций до получения результата: " << count_operations << endl << endl;
 
 	cout << "2. Метод простой итерации с выбором оптимального параметра" << endl;
-	cout << "Корень = " << IterationMethod(1, 2, &myFoo, count_operations) << endl << 
+	cout << "Корень = " << IterationMethod(1.5, 2, &myFoo, myFooDerivative, count_operations) << endl << 
 				"Число итераций до получения результата: " << count_operations << endl << endl;
-	cout << "Корень = " << IterationMethod(-2, 0, &myFoo, count_operations) << endl <<
+	cout << "Корень = " << IterationMethod(-2, -1, &myFoo, myFooDerivative, count_operations) << endl <<
 				"Число итераций до получения результата: " << count_operations << endl << endl;
-	cout << "Корень = " << IterationMethod(-1, 0, &myFoo, count_operations) << endl <<
+	cout << "Корень = " << IterationMethod(-0.5, 0, &myFoo, myFooDerivative, count_operations) << endl <<
 				"Число итераций до получения результата: " << count_operations << endl << endl;
 
 }

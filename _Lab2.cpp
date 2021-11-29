@@ -29,7 +29,7 @@ double myFoo1Derivative_Y(double x, double y)
 	return (1 / pow(cos(x + y), 2));
 }
 
-double myFoo1Derivative_Y(double x, double y)
+double myFoo2Derivative_Y(double x, double y)
 {
 	return (4 * y);
 }
