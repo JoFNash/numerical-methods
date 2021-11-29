@@ -20,7 +20,7 @@ double myFoo1Derivative_X(double x, double y)
 }
 
 double myFoo2Derivative_X(double x, double y)
-{
+{ 
 	return (1.8 * x);
 }
 

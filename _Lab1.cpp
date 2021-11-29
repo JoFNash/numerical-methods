@@ -33,6 +33,7 @@ double DichotomyMethod(double A, double B, double (*Foo)(double), int &count_ope
 	return (X);
 }
 
+
 double IterationMethod(double A, double B, double (*Foo)(double), int &count_operations)
 {
 	double	X;
