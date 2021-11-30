@@ -93,10 +93,12 @@ void analyticalSolution(double x, double y, double *x_result, double *y_result, 
 
 void numericalSolution(double x, double y, double *x_result, double *y_result, long *iter)
 {
-	int i;
-	double ArrayDerivatives[2][2], dx, dy, tmp[2], norm;
+	double ArrayDerivatives[2][2];
+	double dx;
+	double dy;
+	double tmp[2];
+	double norm;
 	*iter = 0;
-	i = 0;
 	norm = 1;
 	while (norm >= E)
 	{
@@ -114,7 +116,6 @@ void numericalSolution(double x, double y, double *x_result, double *y_result, l
 		tmp[0] = myFoo1(x, y);
 		tmp[1] = myFoo2(x, y);
 		norm = sqrt(pow(tmp[0], 2) + pow(tmp[1], 2));
-		i++;
 		(*iter)++;
 		if (norm < E)
 		{
