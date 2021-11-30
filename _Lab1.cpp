@@ -14,11 +14,11 @@ double myFooDerivative(double x)
 	return (3 * x * x - 4 * cos(x));
 }
 
-double DichotomyMethod(double A, double B, double (*Foo)(double), int &count_operations)
+double DichotomyMethod(double A, double B, double (*Foo)(double), int *count_operations)
 {
 	double	X;
 
-	count_operations = 0;
+	(*count_operations) = 0;
 	X = (A + B) / 2.0;
 
 	while (fabs(A - B) > E)
@@ -28,20 +28,20 @@ double DichotomyMethod(double A, double B, double (*Foo)(double), int &count_ope
 		else if ((Foo(X) * Foo(B) < 0))
 			A = X;
 		X = (A + B) / 2.0;
-		count_operations++;
+		(*count_operations)++;
 	}
 	return (X);
 }
 
 
-double IterationMethod(double A, double B, double (*Foo)(double), double (*myFooDerivative)(double), int &count_operations)
+double IterationMethod(double A, double B, double (*Foo)(double), double (*myFooDerivative)(double), int *count_operations)
 {
 	double	X;
 	double	parameter;
 	int		sign;
 	
 	sign = 1;
-	count_operations = 0;
+	(*count_operations) = 0;
 	X = B;
 	if (myFooDerivative(A) < 0)
 		sign = -1;
@@ -49,31 +49,31 @@ double IterationMethod(double A, double B, double (*Foo)(double), double (*myFoo
 	while (abs(Foo(X)) > E)
 	{
 		X = X - parameter * sign * Foo(X);
-		count_operations++;
+		(*count_operations)++;
 	}
 	return (X);
 }
 
 
-// int	main(void)
-// {
-// 	int count_operations;
+int	main(void)
+{
+	int count_operations;
 
-// 	cout << "----------------------Ð’Ð°Ñ€Ð¸Ð°Ð½Ñ‚ â„–7----------------------" << endl;
-// 	cout << "1. ÐœÐµÑ‚Ð¾Ð´ Ð´Ð¸Ñ…Ð¾Ñ‚Ð¾Ð¼Ð¸Ð¸" << endl;
-// 	cout << "ÐšÐ¾Ñ€ÐµÐ½ÑŒ = " << DichotomyMethod(1.5, 2, &myFoo, count_operations) << endl <<
-// 				"Ð§Ð¸ÑÐ»Ð¾ Ð¸Ñ‚ÐµÑ€Ð°Ñ†Ð¸Ð¹ Ð´Ð¾ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð°: " << count_operations << endl << endl;
-// 	cout << "ÐšÐ¾Ñ€ÐµÐ½ÑŒ = " << DichotomyMethod(-2, -1, &myFoo, count_operations) << endl <<
-// 				"Ð§Ð¸ÑÐ»Ð¾ Ð¸Ñ‚ÐµÑ€Ð°Ñ†Ð¸Ð¹ Ð´Ð¾ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð°: " << count_operations << endl << endl;
-// 	cout << "ÐšÐ¾Ñ€ÐµÐ½ÑŒ = " << DichotomyMethod(-0.5, 0, &myFoo, count_operations) << endl << 
-// 				"Ð§Ð¸ÑÐ»Ð¾ Ð¸Ñ‚ÐµÑ€Ð°Ñ†Ð¸Ð¹ Ð´Ð¾ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð°: " << count_operations << endl << endl;
+	cout << "----------------------Âàðèàíò ¹7----------------------" << endl;
+	cout << "1. Ìåòîä äèõîòîìèè" << endl;
+	cout << "Êîðåíü = " << DichotomyMethod(1, 2, &myFoo, &count_operations) << endl <<
+				"×èñëî èòåðàöèé äî ïîëó÷åíèÿ ðåçóëüòàòà: " << count_operations << endl << endl;
+	cout << "Êîðåíü = " << DichotomyMethod(-2, -1, &myFoo, &count_operations) << endl <<
+				"×èñëî èòåðàöèé äî ïîëó÷åíèÿ ðåçóëüòàòà: " << count_operations << endl << endl;
+	cout << "Êîðåíü = " << DichotomyMethod(-0.5, 0, &myFoo, &count_operations) << endl << 
+				"×èñëî èòåðàöèé äî ïîëó÷åíèÿ ðåçóëüòàòà: " << count_operations << endl << endl;
 
-// 	cout << "2. ÐœÐµÑ‚Ð¾Ð´ Ð¿Ñ€Ð¾ÑÑ‚Ð¾Ð¹ Ð¸Ñ‚ÐµÑ€Ð°Ñ†Ð¸Ð¸ Ñ Ð²Ñ‹Ð±Ð¾Ñ€Ð¾Ð¼ Ð¾Ð¿Ñ‚Ð¸Ð¼Ð°Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð°" << endl;
-// 	cout << "ÐšÐ¾Ñ€ÐµÐ½ÑŒ = " << IterationMethod(1.5, 2, &myFoo, myFooDerivative, count_operations) << endl << 
-// 				"Ð§Ð¸ÑÐ»Ð¾ Ð¸Ñ‚ÐµÑ€Ð°Ñ†Ð¸Ð¹ Ð´Ð¾ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð°: " << count_operations << endl << endl;
-// 	cout << "ÐšÐ¾Ñ€ÐµÐ½ÑŒ = " << IterationMethod(-2, -1, &myFoo, myFooDerivative, count_operations) << endl <<
-// 				"Ð§Ð¸ÑÐ»Ð¾ Ð¸Ñ‚ÐµÑ€Ð°Ñ†Ð¸Ð¹ Ð´Ð¾ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð°: " << count_operations << endl << endl;
-// 	cout << "ÐšÐ¾Ñ€ÐµÐ½ÑŒ = " << IterationMethod(-0.5, 0, &myFoo, myFooDerivative, count_operations) << endl <<
-// 				"Ð§Ð¸ÑÐ»Ð¾ Ð¸Ñ‚ÐµÑ€Ð°Ñ†Ð¸Ð¹ Ð´Ð¾ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð°: " << count_operations << endl << endl;
+	cout << "2. Ìåòîä ïðîñòîé èòåðàöèè ñ âûáîðîì îïòèìàëüíîãî ïàðàìåòðà" << endl;
+	cout << "Êîðåíü = " << IterationMethod(1, 2, &myFoo, myFooDerivative, &count_operations) << endl << 
+				"×èñëî èòåðàöèé äî ïîëó÷åíèÿ ðåçóëüòàòà: " << count_operations << endl << endl;
+	cout << "Êîðåíü = " << IterationMethod(-2, -1, &myFoo, myFooDerivative, &count_operations) << endl <<
+				"×èñëî èòåðàöèé äî ïîëó÷åíèÿ ðåçóëüòàòà: " << count_operations << endl << endl;
+	cout << "Êîðåíü = " << IterationMethod(-0.5, 0, &myFoo, myFooDerivative, &count_operations) << endl <<
+				"×èñëî èòåðàöèé äî ïîëó÷åíèÿ ðåçóëüòàòà: " << count_operations << endl << endl;
 
-// }
+}

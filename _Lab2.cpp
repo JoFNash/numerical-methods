@@ -155,6 +155,5 @@ int main(void)
 	numericalSolution(0.4, -0.6, &x_result, &y_result, &iter);
 	cout << "x2 = " << x_result << " y2 = " << y_result << endl;
 	cout << "Число итераций до получения результата: " << iter << endl << endl;
-
 	return 0;
 }
