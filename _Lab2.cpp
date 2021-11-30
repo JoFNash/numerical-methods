@@ -59,9 +59,13 @@ void invertMatrix(double matrix[2][2])
 
 void analyticalSolution(double x, double y, double *x_result, double *y_result, long *iter)
 {
-	int i;
-	double ArrayDerivatives[2][2], dx, dy, tmp[2], norm;
+	double ArrayDerivatives[2][2];
+	double dx;
+	double dy;
+	double tmp[2];
+	double norm;
 	*iter = 0;
+	norm = 1;
 	while (norm >= E)
 	{
 		ArrayDerivatives[0][0] = myFoo1Derivative_X(x, y);
@@ -78,7 +82,6 @@ void analyticalSolution(double x, double y, double *x_result, double *y_result, 
 		tmp[0] = myFoo1(x, y);
 		tmp[1] = myFoo2(x, y);
 		norm = sqrt(pow(tmp[0], 2) + pow(tmp[1], 2));
-		i++;
 		(*iter)++;
 		if (norm < E)
 		{
@@ -93,6 +96,8 @@ void numericalSolution(double x, double y, double *x_result, double *y_result, l
 	int i;
 	double ArrayDerivatives[2][2], dx, dy, tmp[2], norm;
 	*iter = 0;
+	i = 0;
+	norm = 1;
 	while (norm >= E)
 	{
 		ArrayDerivatives[0][0] = getNumFoo_X(x, y, myFoo1);
@@ -128,18 +133,27 @@ int main(void)
 	long	iter;
 
 	iter = 0;
-	x = -0.6;
-	y = 0.5;
 	cout << "Приближенное вычисления корней системы нелинейных уравнений методом Ньютона" << endl;
  	cout << "---------------------Вариант №7---------------------" << endl;
-	cout << "1. Частные производные находятся аналитически" << endl;
-	analyticalSolution(x, y, &x_result, &y_result, &iter);
+	cout << "1. Частные производные находятся аналитически:" << endl;
+	analyticalSolution(-0.6, 0.5, &x_result, &y_result, &iter);
 	cout << "x1 = " << x_result << " y1 = " << y_result << endl;
-	cout << "Число итераций до получения результата: " << iter << endl;
-	cout << "2. Частные производные находятся численно" << endl;
-	numericalSolution(x, y, &x_result, &y_result, &iter);
+	cout << "Число итераций до получения результата: " << iter << endl << endl;
+
+	iter = 0;
+	analyticalSolution(0.4, -0.6, &x_result, &y_result, &iter);
 	cout << "x2 = " << x_result << " y2 = " << y_result << endl;
-	cout << "Число итераций до получения результата: " << iter << endl;
+		cout << "Число итераций до получения результата: " << iter << endl << endl;
+
+	cout << "2. Частные производные находятся численно:" << endl;
+	iter = 0;
+	numericalSolution(-0.6, 0.5, &x_result, &y_result, &iter);
+	cout << "x1 = " << x_result << " y1 = " << y_result << endl;
+	cout << "Число итераций до получения результата: " << iter << endl << endl;
+
+	numericalSolution(0.4, -0.6, &x_result, &y_result, &iter);
+	cout << "x2 = " << x_result << " y2 = " << y_result << endl;
+	cout << "Число итераций до получения результата: " << iter << endl << endl;
 
 	return 0;
 }
