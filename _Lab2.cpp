@@ -125,35 +125,35 @@ void numericalSolution(double x, double y, double *x_result, double *y_result, l
 	}
 }
 
-int main(void)
-{
-	double	x;
-	double	y;
-	double	x_result;
-	double	y_result;
-	long	iter;
+// int main(void)
+// {
+// 	double	x;
+// 	double	y;
+// 	double	x_result;
+// 	double	y_result;
+// 	long	iter;
 
-	iter = 0;
-	cout << "Приближенное вычисления корней системы нелинейных уравнений методом Ньютона" << endl;
- 	cout << "---------------------Вариант №7---------------------" << endl;
-	cout << "1. Частные производные находятся аналитически:" << endl;
-	analyticalSolution(-0.6, 0.5, &x_result, &y_result, &iter);
-	cout << "x1 = " << x_result << " y1 = " << y_result << endl;
-	cout << "Число итераций до получения результата: " << iter << endl << endl;
+// 	iter = 0;
+// 	cout << "Приближенное вычисления корней системы нелинейных уравнений методом Ньютона" << endl;
+//  	cout << "---------------------Вариант №7---------------------" << endl;
+// 	cout << "1. Частные производные находятся аналитически:" << endl;
+// 	analyticalSolution(-0.6, 0.5, &x_result, &y_result, &iter);
+// 	cout << "x1 = " << x_result << " y1 = " << y_result << endl;
+// 	cout << "Число итераций до получения результата: " << iter << endl << endl;
 
-	iter = 0;
-	analyticalSolution(0.4, -0.6, &x_result, &y_result, &iter);
-	cout << "x2 = " << x_result << " y2 = " << y_result << endl;
-		cout << "Число итераций до получения результата: " << iter << endl << endl;
+// 	iter = 0;
+// 	analyticalSolution(0.4, -0.6, &x_result, &y_result, &iter);
+// 	cout << "x2 = " << x_result << " y2 = " << y_result << endl;
+// 		cout << "Число итераций до получения результата: " << iter << endl << endl;
 
-	cout << "2. Частные производные находятся численно:" << endl;
-	iter = 0;
-	numericalSolution(-0.6, 0.5, &x_result, &y_result, &iter);
-	cout << "x1 = " << x_result << " y1 = " << y_result << endl;
-	cout << "Число итераций до получения результата: " << iter << endl << endl;
+// 	cout << "2. Частные производные находятся численно:" << endl;
+// 	iter = 0;
+// 	numericalSolution(-0.6, 0.5, &x_result, &y_result, &iter);
+// 	cout << "x1 = " << x_result << " y1 = " << y_result << endl;
+// 	cout << "Число итераций до получения результата: " << iter << endl << endl;
 
-	numericalSolution(0.4, -0.6, &x_result, &y_result, &iter);
-	cout << "x2 = " << x_result << " y2 = " << y_result << endl;
-	cout << "Число итераций до получения результата: " << iter << endl << endl;
-	return 0;
-}
+// 	numericalSolution(0.4, -0.6, &x_result, &y_result, &iter);
+// 	cout << "x2 = " << x_result << " y2 = " << y_result << endl;
+// 	cout << "Число итераций до получения результата: " << iter << endl << endl;
+// 	return 0;
+// }
